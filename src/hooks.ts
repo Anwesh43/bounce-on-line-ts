@@ -44,3 +44,46 @@ export const useDimension = () => {
         h, 
     }
 }
+
+const maxScale = (scale : number, i : number, n : number) : number => Math.max(0, scale - i / n)
+const divideScale = (scale : number, i : number, n : number) : number => Math.min(1 / n, maxScale(scale, i, n)) * n 
+
+
+export const useStyle = (w : number, h : number, scale : number) => {
+    const background : string = "indigo"
+    const size : number = Math.min(w, h) / 10 
+    const position = 'absolute'
+    const sf : number = Math.sin(scale * Math.PI)
+    const sc1 : number = divideScale(sf, 0, 2)
+    const sc2 : number = divideScale(sf, 1, 2)
+    return {
+        rectStyle() {
+            const left = `${w / 2 - size / 2}px`
+            const top = `${h / 2 - size / 2 - (h / 2 - size / 2) * sc2}px`
+            const width = `${size}px`
+            const height = `${size / 2}px`
+            return {
+                position, 
+                background, 
+                left, 
+                top, 
+                width, 
+                height 
+            }
+        },
+        lineStyle() {
+            const lineWidth = Math.min(w, h) / 90
+            const left = `0px`
+            const top = `${h / 2 - lineWidth / 2}px`
+            const width = `${w * sc1}px`
+            const height = `${lineWidth}px`
+            return {
+                left, 
+                top, 
+                width,
+                height, 
+                background, 
+            }
+        }
+    } 
+}
