@@ -1,5 +1,4 @@
 import {useState, useEffect, CSSProperties} from 'react'
-import { createBrotliCompress } from 'zlib'
 
 const delay : number = 20 
 const scGap : number = 0.01 
@@ -62,13 +61,15 @@ export const useStyle = (w : number, h : number, scale : number) => {
             const top = `${h / 2 - size / 2 - (h / 2 - size / 2) * sc2}px`
             const width = `${size}px`
             const height = `${size / 2}px`
+            const transform = `rotate(${180 * sc2}deg)`
             return {
                 position, 
                 background, 
                 left, 
                 top, 
                 width, 
-                height 
+                height, 
+                transform
             }
         },
         lineStyle() : CSSProperties {
@@ -83,6 +84,7 @@ export const useStyle = (w : number, h : number, scale : number) => {
                 width,
                 height, 
                 background, 
+                position
             }
         }
     } 
