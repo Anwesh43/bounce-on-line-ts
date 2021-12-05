@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, CSSProperties} from 'react'
 import { createBrotliCompress } from 'zlib'
 
 const delay : number = 20 
@@ -57,7 +57,7 @@ export const useStyle = (w : number, h : number, scale : number) => {
     const sc1 : number = divideScale(sf, 0, 2)
     const sc2 : number = divideScale(sf, 1, 2)
     return {
-        rectStyle() {
+        rectStyle() : CSSProperties {
             const left = `${w / 2 - size / 2}px`
             const top = `${h / 2 - size / 2 - (h / 2 - size / 2) * sc2}px`
             const width = `${size}px`
@@ -71,7 +71,7 @@ export const useStyle = (w : number, h : number, scale : number) => {
                 height 
             }
         },
-        lineStyle() {
+        lineStyle() : CSSProperties {
             const lineWidth = Math.min(w, h) / 90
             const left = `0px`
             const top = `${h / 2 - lineWidth / 2}px`
